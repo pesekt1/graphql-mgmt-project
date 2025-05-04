@@ -1,0 +1,37 @@
+version: "3"
+services:
+  project-mgmt-client:
+    build:
+      context: ./project-mgmt-client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./project-mgmt-client:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+  project-mgmt-graphql-server:
+    build:
+      context: ./project-mgmt-graphql-server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./project-mgmt-graphql-server:/app
+      - /app/node_modules
+    depends_on:
+      - db
+    environment:
+      - MONGO_URI=mongodb://db:27017/projectMgmt
+
+  db:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:

@@ -1,0 +1,43 @@
+[{
+  "_id": {
+    "$oid": "632851d1b6b942b311adaa36"
+  },
+  "clientId": "632851c6b6b942b311adaa30",
+  "name": "eCommerce Website",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
+  "status": "In Progress"
+},{
+  "_id": {
+    "$oid": "632851d1b6b942b311adaa37"
+  },
+  "clientId": "632851c6b6b942b311adaa30",
+  "name": "Dating App",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
+  "status": "In Progress"
+},{
+  "_id": {
+    "$oid": "632851d1b6b942b311adaa38"
+  },
+  "clientId": "632851c6b6b942b311adaa30",
+  "name": "SEO Project",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
+  "status": "In Progress"
+},{
+  "_id": {
+    "$oid": "632851d1b6b942b311adaa3a"
+  },
+  "clientId": "632851c6b6b942b311adaa30",
+  "name": "Auction Website",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.",
+  "status": "In Progress"
+},{
+  "_id": {
+    "$oid": "632983c30de62b42cd243b55"
+  },
+  "name": "New Project",
+  "description": "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commo…",
+  "status": "Not Started",
+  "clientId": {
+    "$oid": "632851c6b6b942b311adaa2f"
+  }
+}]

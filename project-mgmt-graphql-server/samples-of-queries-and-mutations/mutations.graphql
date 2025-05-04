@@ -1,0 +1,19 @@
+mutation addProject {
+  addProject(
+    name: "Test2"
+    description: "Test2"
+    clientId: "632851c6b6b942b311adaa2f"
+    status: completed
+  ) {
+    id
+    name
+    description
+    status
+    client {
+      id
+      name
+      email
+      phone
+    }
+  }
+}

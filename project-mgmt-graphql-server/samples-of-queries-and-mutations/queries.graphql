@@ -1,0 +1,10 @@
+query {
+  projects {
+    id
+    name
+    client {
+      name
+      email
+    }
+  }
+}
