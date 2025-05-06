@@ -27,7 +27,7 @@ services:
       - MONGO_URI=mongodb://db:27017/projectMgmt
 
   db:
-    image: mongo:latest
+    image: mongo:8
     ports:
       - "27018:27017"
     volumes:
