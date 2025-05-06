@@ -8,6 +8,7 @@ export default function AddClientModal() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [validationError, setValidationError] = useState('');
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: { name, email, phone },
@@ -21,14 +22,38 @@ export default function AddClientModal() {
     },
   });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (name === '' || email === '' || phone === '') {
-      return alert('Please fill in all fields');
+      setValidationError('Please fill in all fields');
+      return;
     }
 
-    addClient(name, email, phone);
+    // Simple email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setValidationError('Please enter a valid email address');
+      return;
+    }
+
+    // Simple phone validation (digits, spaces, dashes, parentheses, min 7 chars)
+    const phoneRegex = /^[\d\s\-()+]{7,}$/;
+    if (!phoneRegex.test(phone)) {
+      setValidationError('Please enter a valid phone number');
+      return;
+    }
+
+    setValidationError('');
+
+    try {
+      const res = await addClient();
+      console.log('AddClient result:', res);
+    } catch (err) {
+      console.error('AddClient error:', err);
+      setValidationError('Failed to add client: ' + err.message);
+      return;
+    }
 
     setName('');
     setEmail('');
@@ -69,6 +94,9 @@ export default function AddClientModal() {
               ></button>
             </div>
             <div className='modal-body'>
+              {validationError && (
+                <div className="alert alert-danger">{validationError}</div>
+              )}
               <form onSubmit={onSubmit}>
                 <div className='mb-3'>
                   <label className='form-label'>Name</label>
@@ -103,7 +131,6 @@ export default function AddClientModal() {
 
                 <button
                   type='submit'
-                  data-bs-dismiss='modal'
                   className='btn btn-secondary'
                 >
                   Submit
