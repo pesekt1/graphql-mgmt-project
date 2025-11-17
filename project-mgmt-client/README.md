@@ -1,19 +1,22 @@
 # Project management client using React and GraphQL client
+
 Communicating with a node.js express server.
 
 ![System Architecture](graphQL.png)
 
 dependencies:
+
 - @apollo/client
 - graphql
 
 ## Wrapping the up into an Appolo client provider:
-  
+
 ```js
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 ```
 
 ### Cache:
+
 ```js
 const cache = new InMemoryCache({
   typePolicies: {
@@ -36,22 +39,28 @@ const cache = new InMemoryCache({
 ```
 
 ### Appolo client:
+
+.env file:
+
+```
+REACT_APP_GRAPHQL_URI=http://localhost:5000/graphql
+```
+
 ```js
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
+  uri: process.env.REACT_APP_GRAPHQL_URI,
   cache,
 });
 ```
 
 ### Wrapping the app in the Appolo provider:
+
 ```js
 function App() {
   return (
     <>
       <ApolloProvider client={client}>
-        <Router>
-          ...
-        </Router>
+        <Router>...</Router>
       </ApolloProvider>
     </>
   );
@@ -59,9 +68,11 @@ function App() {
 ```
 
 ## GraphQL queries:
+
 Example - getClients:
+
 ```js
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const GET_CLIENTS = gql`
   query getClients {
@@ -78,9 +89,11 @@ export { GET_CLIENTS };
 ```
 
 ## GraphQL mutations:
+
 Example - addClient, deleteClient:
+
 ```js
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 const ADD_CLIENT = gql`
   mutation addClient($name: String!, $email: String!, $phone: String!) {
@@ -109,13 +122,15 @@ export { ADD_CLIENT, DELETE_CLIENT };
 
 ## Using the Appolo client in the components:
 
-### GraphQL queries 
+### GraphQL queries
+
 Example - projects page:
+
 ```js
-import { useQuery } from '@apollo/client';
-import ClientRow from './ClientRow';
-import Spinner from './Spinner';
-import { GET_CLIENTS } from '../queries/clientQueries';
+import { useQuery } from "@apollo/client";
+import ClientRow from "./ClientRow";
+import Spinner from "./Spinner";
+import { GET_CLIENTS } from "../queries/clientQueries";
 
 export default function Clients() {
   const { loading, error, data } = useQuery(GET_CLIENTS);
@@ -126,7 +141,7 @@ export default function Clients() {
   return (
     <>
       {!loading && !error && (
-        <table className='table table-hover mt-3'>
+        <table className="table table-hover mt-3">
           <thead>
             <tr>
               <th>Name</th>
@@ -147,19 +162,21 @@ export default function Clients() {
 }
 ```
 
-### Mutations 
+### Mutations
+
 Example - add a project:
+
 ```js
-import { useState } from 'react';
-import { FaUser } from 'react-icons/fa';
-import { useMutation } from '@apollo/client';
-import { ADD_CLIENT } from '../mutations/clientMutations';
-import { GET_CLIENTS } from '../queries/clientQueries';
+import { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { useMutation } from "@apollo/client";
+import { ADD_CLIENT } from "../mutations/clientMutations";
+import { GET_CLIENTS } from "../queries/clientQueries";
 
 export default function AddClientModal() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [addClient] = useMutation(ADD_CLIENT, {
     variables: { name, email, phone },
@@ -176,39 +193,37 @@ export default function AddClientModal() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (name === '' || email === '' || phone === '') {
-      return alert('Please fill in all fields');
+    if (name === "" || email === "" || phone === "") {
+      return alert("Please fill in all fields");
     }
 
     addClient(name, email, phone);
 
-    setName('');
-    setEmail('');
-    setPhone('');
+    setName("");
+    setEmail("");
+    setPhone("");
   };
 
-  return (
-    <>
-      ...
-    </>
-  );
+  return <>...</>;
 }
 ```
 
 ## Bootstrap modals:
+
 Example - add a client:
+
 ```js
-      <button
-        type='button'
-        className='btn btn-secondary'
-        data-bs-toggle='modal'
-        data-bs-target='#addClientModal'
-      >
-        <div className='d-flex align-items-center'>
-          <FaUser className='icon' />
-          <div>Add Client</div>
-        </div>
-      </button>
+<button
+  type="button"
+  className="btn btn-secondary"
+  data-bs-toggle="modal"
+  data-bs-target="#addClientModal"
+>
+  <div className="d-flex align-items-center">
+    <FaUser className="icon" />
+    <div>Add Client</div>
+  </div>
+</button>
 ```
 
 Now when we click on the button we get the markup specified by the target id:
@@ -233,8 +248,6 @@ Now when we click on the button we get the markup specified by the target id:
 ```
 
 Abowe we have the submit button which closes the modal when clicked.
-
-
 
 ### Create react app
 
