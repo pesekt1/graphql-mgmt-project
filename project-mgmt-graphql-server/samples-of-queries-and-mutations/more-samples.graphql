@@ -1,0 +1,131 @@
+# ============================
+# QUERIES
+# ============================
+
+# Get all clients
+query GetClients {
+  clients {
+    id
+    name
+    email
+    phone
+  }
+}
+
+# Get a single client by ID
+query GetClient {
+  client(id: "CLIENT_ID_HERE") {
+    id
+    name
+    email
+    phone
+  }
+}
+
+# Get all projects
+query GetProjects {
+  projects {
+    id
+    name
+    description
+    status
+    client {
+      name
+      email
+    }
+  }
+}
+
+# Get a single project by ID
+query GetProject {
+  project(id: "PROJECT_ID_HERE") {
+    id
+    name
+    description
+    status
+    client {
+      id
+      name
+    }
+  }
+}
+
+# ============================
+# MUTATIONS — CLIENTS
+# ============================
+
+# Add a client
+mutation AddClient {
+  addClient(
+    name: "John Doe"
+    email: "john@example.com"
+    phone: "555-444-3333"
+  ) {
+    id
+    name
+  }
+}
+
+# Update a client
+mutation UpdateClient {
+  updateClient(
+    id: "CLIENT_ID_HERE"
+    name: "Updated Name"
+    email: "updated@example.com"
+    phone: "000-111-2222"
+  ) {
+    id
+    name
+    email
+    phone
+  }
+}
+
+# Delete a client
+mutation DeleteClient {
+  deleteClient(id: "CLIENT_ID_HERE") {
+    id
+    name
+  }
+}
+
+# ============================
+# MUTATIONS — PROJECTS
+# ============================
+
+# Add a project
+mutation AddProject {
+  addProject(
+    name: "New Project"
+    description: "This is a demo project"
+    status: new # options: new, progress, completed
+    clientId: "CLIENT_ID_HERE"
+  ) {
+    id
+    name
+    status
+  }
+}
+
+# Update a project
+mutation UpdateProject {
+  updateProject(
+    id: "PROJECT_ID_HERE"
+    name: "Updated project name"
+    description: "Updated description"
+    status: completed # options: new, progress, completed
+  ) {
+    id
+    name
+    description
+    status
+  }
+}
+
+# Delete a project
+mutation DeleteProject {
+  deleteProject(id: "PROJECT_ID_HERE") {
+    id
+    name
+  }
+}
